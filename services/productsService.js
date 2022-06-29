@@ -11,7 +11,7 @@ const productsService = {
   async checkIfExists(id) {
     const exists = await productsModel.exists(id);
     if (!exists) {
-      throw new NotFoundError('Product not found')
+      throw new NotFoundError('Product not found');
     }
   },
 
@@ -23,7 +23,7 @@ const productsService = {
   async get(id) {
     const product = await productsModel.get(id);
     return product;
-  }
-}
+  },
+};
 
 module.exports = productsService;

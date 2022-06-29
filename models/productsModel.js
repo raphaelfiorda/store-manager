@@ -17,7 +17,7 @@ const productsModel = {
     const sql = 'SELECT * FROM StoreManager.products WHERE id = ?';
     const [[exists]] = await connection.execute(sql, [id]);
     return !!exists;
-  }
+  },
 };
 
 module.exports = productsModel;
