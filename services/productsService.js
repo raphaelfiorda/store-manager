@@ -13,6 +13,7 @@ const productsService = {
     if (!exists) {
       throw new NotFoundError('Product not found');
     }
+    return true;
   },
 
   async list() {
