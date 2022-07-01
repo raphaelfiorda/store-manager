@@ -18,6 +18,12 @@ const productsModel = {
     const [[exists]] = await connection.execute(sql, [id]);
     return !!exists;
   },
+
+  async add(name) {
+    const sql = 'INSERT INTO StoreManager.products (name) VALUES (?)';
+    const [{ insertId }] = await connection.execute(sql, [name]);
+    return insertId;
+  }
 };
 
 module.exports = productsModel;

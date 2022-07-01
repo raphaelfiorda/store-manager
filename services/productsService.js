@@ -8,6 +8,10 @@ const productsService = {
     id: Joi.number().required().integer().positive(),
   })),
 
+  validateBody: runSchema(Joi.object({
+    name: Joi.string().required().min(5),
+  })),
+
   async checkIfExists(id) {
     const exists = await productsModel.exists(id);
     if (!exists) {
@@ -25,6 +29,11 @@ const productsService = {
     const product = await productsModel.get(id);
     return product;
   },
+
+  async add(name) {
+    const product = await productsModel.add(name);
+    return product;
+  }
 };
 
 module.exports = productsService;
