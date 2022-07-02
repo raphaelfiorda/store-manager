@@ -1,6 +1,7 @@
 const express = require('express');
 require('express-async-errors');
 const productsRoute = require('./routes/productsRoute');
+const salesRoute = require('./routes/salesRoute');
 
 const app = express();
 
@@ -12,10 +13,10 @@ app.get('/', (_request, response) => {
 });
 
 app.use('/products', productsRoute);
+app.use('/sales', salesRoute);
 
 app.use((err, _req, res, _next) => {
   const { name, message } = err;
-  console.dir(err)
   switch (name) {
     case 'NotFoundError':
       res.status(404).json({ message }); break;

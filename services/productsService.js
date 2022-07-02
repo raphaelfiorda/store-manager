@@ -20,6 +20,17 @@ const productsService = {
     return true;
   },
 
+  async checkIfExistsByIdsArray(idsArray) {
+    const productsFound = await productsModel.listByIdsArray(idsArray);
+
+    if (!productsFound.length) throw new NotFoundError('Product not found');
+
+    if (productsFound.length !== idsArray.length) {
+      console.log([productsFound, idsArray]);
+      throw new NotFoundError('Product not found');
+    }
+  },
+
   async list() {
     const products = await productsModel.list();
     return products;
@@ -33,7 +44,7 @@ const productsService = {
   async add(name) {
     const product = await productsModel.add(name);
     return product;
-  }
+  },
 };
 
 module.exports = productsService;

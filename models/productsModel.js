@@ -7,6 +7,12 @@ const productsModel = {
     return products;
   },
 
+  async listByIdsArray(idsArray) {
+      const sql = 'SELECT * FROM StoreManager.products WHERE id IN (?)';
+      const [productsFound] = await connection.query(sql, [idsArray]);
+      return productsFound;
+  },
+
   async get(id) {
     const sql = 'SELECT * FROM StoreManager.products WHERE id = ?';
     const [[product]] = await connection.execute(sql, [id]);
@@ -23,7 +29,7 @@ const productsModel = {
     const sql = 'INSERT INTO StoreManager.products (name) VALUES (?)';
     const [{ insertId }] = await connection.execute(sql, [name]);
     return insertId;
-  }
+  },
 };
 
 module.exports = productsModel;
