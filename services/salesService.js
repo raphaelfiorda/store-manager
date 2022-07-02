@@ -22,6 +22,24 @@ const salesService = {
     return serializedData;
   },
 
+  serializeBulk(data, id) {
+    const { date, quantity } = data;
+    if (id) {
+      return {
+        date,
+        productId: data.product_id,
+        quantity,
+      };
+    }
+    const serializedBulk = {
+      saleId: data.id,
+      date,
+      productId: data.product_id,
+      quantity,
+    };
+    return serializedBulk;
+  },
+
   async checkIfExists(id) {
     const exists = await salesModel.exists(id);
     if (!exists) {
@@ -31,7 +49,7 @@ const salesService = {
   },
 
   async list() {
-    const sales = await salesModel.list();
+    const sales = await salesProductModel.listBulkSaleAndProducts();
     return sales;
   },
 

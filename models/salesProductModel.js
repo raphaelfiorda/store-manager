@@ -12,11 +12,15 @@ const salesProductModel = {
     }
   },
 
-  // async list() {
-  //   const sql = 'SELECT * FROM StoreManager.sales_products';
-  //   const [sales] = await connection.execute(sql);
-  //   return sales;
-  // },
+  async listBulkSaleAndProducts() {
+    const sql = `SELECT SA.id, SA.date, SP.product_id, SP.quantity
+    FROM StoreManager.sales AS SA
+    INNER JOIN StoreManager.sales_products AS SP
+    ON SA.id = SP.sale_id
+    ORDER BY SA.id, SP.product_id;`;
+    const [sales] = await connection.execute(sql);
+    return sales;
+  },
 
   // // async get(id) {
   // //   const sql = 'SELECT * FROM StoreManager.products WHERE id = ?';

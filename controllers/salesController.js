@@ -16,14 +16,17 @@ const salesController = {
 
   async listSales(_req, res) {
     const sales = await salesService.list();
-    res.status(200).json(sales);
+    const serializedResult = sales.map((el) => salesService.serializeBulk(el, null));
+    res.status(200).json(serializedResult);
   },
 
   async getSale(req, res) {
     const { id } = await salesService.validateParamsId(req.params);
     await salesService.checkIfExists(id);
     const sale = await salesService.get(id);
-    res.status(200).json(sale);
+    const serializedResult = sale
+      .map((el) => salesService.serializeBulk(el, id));
+    res.status(200).json(serializedResult);
   },
 };
 

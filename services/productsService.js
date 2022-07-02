@@ -26,7 +26,6 @@ const productsService = {
     if (!productsFound.length) throw new NotFoundError('Product not found');
 
     if (productsFound.length !== idsArray.length) {
-      console.log([productsFound, idsArray]);
       throw new NotFoundError('Product not found');
     }
   },
