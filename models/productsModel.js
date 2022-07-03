@@ -1,4 +1,5 @@
 const connection = require('../connection');
+const { edit } = require('../services/productsService');
 
 const productsModel = {
   async list() {
@@ -29,6 +30,12 @@ const productsModel = {
     const sql = 'INSERT INTO StoreManager.products (name) VALUES (?)';
     const [{ insertId }] = await connection.execute(sql, [name]);
     return insertId;
+  },
+
+  async edit(id, name) {
+    const sql = 'UPDATE StoreManager.products SET name = ? WHERE id = ?';
+    const [{ affectedRows }] = await connection.execute(sql, [name, id]);
+    return affectedRows;
   },
 };
 

@@ -25,7 +25,7 @@ app.use((err, _req, res, _next) => {
         res.status(400).json({ message }); break;
       }
       res.status(422).json({ message }); break;
-    default: res.sendStatus(500);
+    default: res.status(500).json({ message });
   }
 });
 
