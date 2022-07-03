@@ -1,5 +1,4 @@
 const connection = require('../connection');
-const { edit } = require('../services/productsService');
 
 const productsModel = {
   async list() {
