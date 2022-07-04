@@ -17,7 +17,7 @@ const productsController = {
     const { id } = await productsService.validateParamsId(req.params);
     await productsService.checkIfExists(id);
     await productsService.remove(id);
-    res.sendStatus(204);
+    res.status(204).json({ ok: true });
   },
 
   async getProduct(req, res) {

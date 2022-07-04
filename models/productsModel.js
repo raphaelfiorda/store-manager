@@ -28,6 +28,7 @@ const productsModel = {
   async remove(id) {
     const sql = 'DELETE FROM StoreManager.products WHERE id = ?';
     await connection.query(sql, [id]);
+    return true;
   },
 
   async add(name) {

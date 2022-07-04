@@ -85,4 +85,43 @@ describe('Testa a camada controller de /products', () => {
       expect(res.json.calledWith(queryProducts[0])).to.equals(true);
     });
   });
+
+  describe('Verifica a função #addProduct', () => {
+    it('Se retorna o status e objeto esperado', async () => {
+      const req = {};
+      const res = {};
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      req.body = { name: 'Teste'};
+
+      sinon.stub(productsService, 'add').resolves(1);
+      sinon.stub(productsService, 'get').resolves(queryProducts[0]);
+
+      await productsController.addProduct(req, res);
+
+      expect(res.status.calledWith(201)).to.equals(true);
+      expect(res.json.calledWith(queryProducts[0])).to.equals(true);
+    });
+  });
+
+  describe('Verifica a função #removeProduct', () => {
+    it('Se retorna o status e objeto esperado', async () => {
+      const req = {};
+      const res = {};
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      req.params = { id: 2 };
+
+      sinon.stub(productsService, 'checkIfExists').resolves(true);
+      sinon.stub(productsService, 'remove').resolves(true);
+
+      await productsController.removeProduct(req, res);
+
+      expect(res.status.calledWith(204)).to.equals(true);
+      expect(res.json.calledWith({ ok: true })).to.equals(true);    });
+  });
 });
