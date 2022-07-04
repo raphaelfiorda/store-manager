@@ -35,6 +35,10 @@ const productsService = {
     return products;
   },
 
+  async remove(id) {
+    await productsModel.remove(id);
+  },
+
   async get(id) {
     const product = await productsModel.get(id);
     return product;
