@@ -6,5 +6,6 @@ const salesRoute = Router();
 salesRoute.get('/', salesController.listSales);
 salesRoute.get('/:id', salesController.getSale);
 salesRoute.post('/', salesController.addSales);
+salesRoute.delete('/:id', salesController.removeSale);
 
 module.exports = salesRoute;

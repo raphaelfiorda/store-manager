@@ -28,6 +28,17 @@ const salesModel = {
     const [{ insertId }] = await connection.execute(sql);
     return insertId;
   },
+
+  async remove(id) {
+    try {
+      const sql = `DELETE SA, SP
+      FROM StoreManager.sales AS SA
+      INNER JOIN StoreManager.sales_products AS SP
+      ON SA.id = SP.sale_id AND SA.id = ?`;
+      await connection.execute(sql, [id]);
+      return true;
+    } catch (err) { console.log(err.message); }
+  },
 };
 
 module.exports = salesModel;

@@ -28,6 +28,13 @@ const salesController = {
       .map((el) => salesService.serializeBulk(el, id));
     res.status(200).json(serializedResult);
   },
+
+  async removeSale(req, res) {
+    const { id } = await salesService.validateParamsId(req.params);
+    await salesService.checkIfExists(id);
+    await salesService.remove(id);
+    res.status(204).json({ ok: true });
+  },
 };
 
 module.exports = salesController;
