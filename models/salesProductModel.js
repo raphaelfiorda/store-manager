@@ -21,19 +21,6 @@ const salesProductModel = {
     const [sales] = await connection.execute(sql);
     return sales;
   },
-
-  // // async get(id) {
-  // //   const sql = 'SELECT * FROM StoreManager.products WHERE id = ?';
-  // //   const [[product]] = await connection.execute(sql, [id]);
-  // //   return product;
-  // // },
-
-  // // async exists(id) {
-  // //   const sql = 'SELECT * FROM StoreManager.products WHERE id = ?';
-  // //   const [[exists]] = await connection.execute(sql, [id]);
-  // //   return !!exists;
-  // // },
-
 };
 
 module.exports = salesProductModel;
