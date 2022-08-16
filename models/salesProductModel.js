@@ -37,7 +37,7 @@ const salesProductModel = {
       SET quantity = ? WHERE sale_id = ? AND product_id = ?`;
     await products.forEach(({ productId, quantity }) =>
       connection.execute(sql, [quantity, saleId, productId]));
-  }
+  },
 };
 
 module.exports = salesProductModel;

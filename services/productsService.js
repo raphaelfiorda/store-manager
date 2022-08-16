@@ -53,6 +53,11 @@ const productsService = {
     const { affectedId } = await productsModel.edit(id, name);
     return affectedId;
   },
+
+  async search(q) {
+    const products = await productsModel.search(q);
+    return products;
+  },
 };
 
 module.exports = productsService;

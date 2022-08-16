@@ -38,6 +38,11 @@ const productsController = {
     res.status(200).json(productEdited);
   },
 
+  async searchProduct(req, res) {
+    const { q } = req.query;
+    const products = await productsService.search(q);
+    res.status(200).json(products);
+  },
 };
 
 module.exports = productsController;
