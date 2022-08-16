@@ -1,5 +1,7 @@
 const salesService = require('../services/salesService');
 const productsService = require('../services/productsService');
+const { validateBody } = require('../services/productsService');
+const { serialize } = require('../services/salesService');
 
 const salesController = {
   async addSales(req, res) {
@@ -34,6 +36,21 @@ const salesController = {
     await salesService.checkIfExists(id);
     await salesService.remove(id);
     res.status(204).json({ ok: true });
+  },
+
+  async editSale(req, res) {
+    const { id } = await salesService.validateParamsId(req.params);
+    const products = req.body;
+    await products.forEach((el) => salesService.validateBody(el));
+    const productIds = products.map((el) => el.productId)
+    await productsService.checkIfExistsByIdsArray(productIds)
+    await salesService.checkIfExists(id);
+    await salesService.edit(id, products);
+    const saleEdited = await salesService.getBulkSaleAndProducts(id);
+    res.status(200).json({
+      saleId: id,
+      itemsUpdated: saleEdited.map((el) => serialize(el)),
+    });
   },
 };
 

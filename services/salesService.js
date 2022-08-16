@@ -68,6 +68,15 @@ const salesService = {
     await salesModel.remove(id);
     return true;
   },
+
+  async edit(id, products) {
+    await salesProductModel.edit(id, products);
+  },
+
+  async getBulkSaleAndProducts(id) {
+    const sale = await salesProductModel.getBulkSaleAndProducts(id);
+    return sale;
+  },
 };
 
 module.exports = salesService;
